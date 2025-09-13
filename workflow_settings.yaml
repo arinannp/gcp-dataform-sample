@@ -1,0 +1,4 @@
+defaultProject: id-int-0121-datarnd2025
+defaultDataset: dataform
+defaultAssertionDataset: dataform_assertions
+dataformCoreVersion: 3.0.26
