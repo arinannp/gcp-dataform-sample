@@ -1,0 +1,21 @@
+config {
+    type: "operations",
+    hasOutput: true
+}
+
+CREATE OR REPLACE TABLE
+  ${self()} AS
+SELECT
+  farm.farm_id,
+  farm.crop_type,
+  soil.ph,
+  soil.moisture,
+  soil.organic_matter,
+  farm.geom,
+  CURRENT_TIMESTAMP() AS ingestion_timestamp
+FROM
+  agriculture.farmland_boundaries AS farm
+LEFT JOIN
+  agriculture.soil_data AS soil
+USING
+  (farm_id);
