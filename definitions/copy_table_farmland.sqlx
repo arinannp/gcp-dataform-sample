@@ -1,0 +1,37 @@
+config {
+    type: "table",
+    description: "Description of the table",
+    columns: {
+        farm_id: docs.user_id,
+        crop_type: "Description of the second column"
+    },
+    dependencies: ["first_view", "second_view"],
+    database: "id-int-0121-datarnd2025",
+    schema: "agriculture",
+    name: "farmland_boundaries_copy",
+    bigquery: {
+        clusterBy: ["farm_id", "crop_type"],
+        partitionBy: "DATE(ingestion_timestamp)",
+        requirePartitionFilter: true,
+        partitionExpirationDays: 14,
+        labels: {
+            business: "agriculture",
+            "cost-center": "farmland"
+        }
+    }
+}
+
+  /*
+  You can also add table dependencies manually to the config block for
+  tables, assertions, data source declarations, or custom SQL operations that are not referenced in a ref function in the SELECT statement.
+
+  Dataform runs these dependencies before dependent tables.
+  */
+  /*
+  The ref function is a built-in Dataform core function that is critical to dependency management in Dataform.
+  The ref function lets you reference and automatically depend on the following objects defined in your Dataform workflow
+  */
+SELECT
+  *
+FROM
+  ${ref("agriculture", "farmland_boundaries")}

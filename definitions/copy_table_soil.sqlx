@@ -1,0 +1,13 @@
+config {
+    type: "table",
+    columns: docs.columns,
+    dependencies: ["first_view", "second_view"],
+    database: "id-int-0121-datarnd2025",
+    schema: "agriculture",
+    name: "soil_data_copy"
+}
+
+SELECT
+  *
+FROM
+  ${ref("agriculture", "soil_data")}
