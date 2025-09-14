@@ -3,7 +3,7 @@ config {
   hasOutput: true  // optional, lets you reference the empty table
 }
 
-CREATE TABLE ${self()} (
+CREATE OR REPLACE TABLE ${self()} (
   x INT64,
   y STRING
 )
