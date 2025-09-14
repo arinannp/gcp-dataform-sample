@@ -1,6 +1,6 @@
 config {
     type: "view",
-    materialized: true
+    //materialized: true
 }
 
   -- Use the ref() function to manage dependencies.
