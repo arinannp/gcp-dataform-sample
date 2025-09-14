@@ -1,0 +1,13 @@
+config { type: "assertion" }
+
+
+-- The following code sample shows a manual assertion in a SQLX file 
+-- that asserts that fields farm_id, crop_type, and ingestion_timestamp are never NULL in copy_table_farmland_resolve
+SELECT
+  *
+FROM
+  ${ref("copy_table_farmland_resolve")}
+WHERE
+  farm_id IS NULL
+  OR crop_type IS NULL
+  OR ingestion_timestamp IS NULL

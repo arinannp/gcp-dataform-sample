@@ -1,16 +1,24 @@
 config {
     type: "table",
-    dependencies: ["farmland_boundaries"]
+    dependencies: ["farmland_boundaries"],
+    assertions: {
+        nonNull: ["farm_id", "ingestion_timestamp"],
+        rowConditions: [
+            'ingestion_timestamp is null or ingestion_timestamp <= "2025-09-14"',
+            'farm_id like "F%"'
+        ],
+        uniqueKey: ["farm_id"],
+        //uniqueKeys: [["farm_id"], ["ingestion_timestamp", "crop_type"]],
+    },
 }
 
-/*
-The resolve function lets you reference a table or data source declaration in a SELECT statement like the ref function, 
-but it doesn't add the reference as a dependency. 
+  /*
+  The resolve function lets you reference a table or data source declaration in a SELECT statement like the ref function,
+  but it doesn't add the reference as a dependency.
 
-This means that the object referenced using the resolve function does not affect the execution of the table that uses the resolve function.
-*/
+  This means that the object referenced using the resolve function does not affect the execution of the table that uses the resolve function.
+  */
 SELECT
   *
 FROM
   ${resolve("farmland_boundaries")}
-
